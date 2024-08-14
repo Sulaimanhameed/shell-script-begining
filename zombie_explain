@@ -1,0 +1,53 @@
+Script Breakdown
+
+    Shebang Line:
+
+    #!/bin/bash
+
+    This line tells the system that the script should be run using the Bash shell.
+
+    Function Definition:
+
+    kill_zombies() {
+
+    This defines a function named kill_zombies.
+
+    Finding Zombie Processes:
+
+    zombies=$(ps aux | awk '{ print $8 " " $2 }' | grep -w Z | awk '{ print $2 }')
+
+        ps aux: Lists all running processes.
+        awk '{ print $8 " " $2 }': Extracts the 8th and 2nd columns from the ps output, which are the process status and PID (Process ID), respectively.
+        grep -w Z: Filters the processes to find those with a status of ‘Z’ (zombie).
+        awk '{ print $2 }': Extracts the PID of the zombie processes.
+
+    Checking for Zombie Processes:
+
+    if [ -z "$zombies" ]; then
+        echo "No zombie processes found"
+    else
+
+        if [ -z "$zombies" ]: Checks if the zombies variable is empty.
+        echo "No zombie processes found": Prints a message if no zombie processes are found.
+
+    Killing Zombie Processes:
+
+        echo "Killing zombie processes: $zombies"
+        kill -9 $zombies
+        echo "Zombie processes killed"
+
+        echo "Killing zombie processes: $zombies": Prints the PIDs of the zombie processes that will be killed.
+        kill -9 $zombies: Sends the SIGKILL signal to forcefully kill the zombie processes.
+        echo "Zombie processes killed": Prints a confirmation message.
+
+    Calling the Function:
+
+    kill_zombies
+
+    This line calls the kill_zombies function to execute the steps defined above.
+
+Summary
+
+This script identifies zombie processes (processes that have completed execution but still have an entry in the process table) and forcefully kills them using their PIDs.
+
+If you have any more questions or need further clarification, feel free to ask!

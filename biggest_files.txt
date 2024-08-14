@@ -1,0 +1,10 @@
+4.9G	/home/sulaiman/.vagrant.d/boxes/alvistack-VAGRANTSLASH-ubuntu-22.04/20240727.0.0/virtualbox/packer-virtualbox-iso-1722026646-disk001.vmdk
+4.7G	/home/sulaiman/VirtualBox VMs/ubuntu-desktop_controlplane_1723618390270_81995/ubuntu-22.04-amd64-disk001.vmdk
+4.6G	/home/sulaiman/VirtualBox VMs/ubuntu-desktop_node01_1723618504860_16650/ubuntu-22.04-amd64-disk001.vmdk
+4.1G	/swap.img
+780M	/home/sulaiman/.vagrant.d/boxes/bento-VAGRANTSLASH-ubuntu-22.04/202404.23.0/amd64/virtualbox/ubuntu-22.04-amd64-disk001.vmdk
+585M	/home/sulaiman/.vagrant.d/boxes/bento-VAGRANTSLASH-ubuntu-24.04/202404.26.0/amd64/virtualbox/ubuntu-24.04-amd64-disk001.vmdk
+506M	/var/lib/snapd/snaps/gnome-42-2204_176.snap
+314M	/var/lib/snapd/snaps/code_166.snap
+314M	/var/lib/snapd/snaps/code_165.snap
+270M	/var/lib/snapd/snaps/firefox_4757.snap
