@@ -1,21 +1,31 @@
 #!/bin/bash
 
-# Function to find and kill all zombie processes
-kill_zombies() {
-    # Get the list of all zombie processes
-    zombies=$(ps aux | awk '{ print $8 " " $2 }' | grep -w Z | awk '{ print $2 }')
+# Find zombie processes
+zombie_pids=$(ps aux | awk '$8=="Z" {print $2}')
 
-    # Check if there are any zombie processes
-    if [ -z "$zombies" ]; then
-        echo "No zombie processes found"
+# Check if any zombies were found
+if [ -z "$zombie_pids" ]; then
+    echo "No zombie processes found."
+    exit 0
+fi
+
+echo "Found zombie processes with PIDs: $zombie_pids"
+
+# Attempt to kill parent processes of zombies
+for pid in $zombie_pids; do
+    ppid=$(ps -o ppid= -p "$pid")
+    if [ -n "$ppid" ]; then
+        echo "Attempting to kill parent process (PID: $ppid) of zombie (PID: $pid)"
+        kill -9 "$ppid"
     else
-        # Kill all the zombie processes
-        echo "Killing zombie processes: $zombies"
-        kill -9 $zombies
-        echo "Zombie processes killed"
+        echo "Could not find parent process for zombie (PID: $pid)"
     fi
-}
+done
 
-# Call the function to kill zombie processes
-kill_zombies
-
+# Check if zombies are gone
+remaining_zombies=$(ps aux | awk '$8=="Z" {print $2}')
+if [ -z "$remaining_zombies" ]; then
+    echo "All zombie processes have been eliminated."
+else
+    echo "Some zombie processes could not be killed. Remaining zombies: $remaining_zombies"
+fi
